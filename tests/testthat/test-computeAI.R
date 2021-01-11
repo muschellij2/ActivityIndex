@@ -14,6 +14,11 @@ testthat::test_that("computeAI same answer regardless of input", {
 
   testthat::expect_named(sampleGT3XPlus$Raw, c("Date", "Time", "X", "Y", "Z"))
 
+  testthat::expect_error({
+    AI_sampleTable_x = computeActivityIndex(
+      sampleTable,
+      epoch=1, hertz=30)
+  })
   s0 = sampleTable[1004700:1005600,]
   AI_sampleTable_x = computeActivityIndex(
     sampleTable,
