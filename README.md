@@ -1,14 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<!-- badges: start -->
+
 @muschellij2 badges: [![Travis build
 status](https://travis-ci.com/muschellij2/ActivityIndex.svg?branch=master)](https://travis-ci.com/muschellij2/ActivityIndex)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/muschellij2/ActivityIndex?branch=master&svg=true)](https://ci.appveyor.com/project/muschellij2/ActivityIndex)
+<!-- badges: end -->
 
 # ActivityIndex
 
-ActivityIndex is an R package which provides functions to read and
+`ActivityIndex` is an R package which provides functions to read and
 process raw accelerometry data.
 
 ## Overview
@@ -35,31 +38,31 @@ Metrics](https://doi.org/10.1371/journal.pone.0160644).
 
 ## Package Installation
 
-ActivityIndex software can be installed via GitHub. Users should have
-`R` installed on their computer before installing ActivityIndex.
+The `ActivityIndex` package can be installed via GitHub. Users should
+have `R` installed on their computer before installing `ActivityIndex.`
 
-### Install devtools package
+### Install remotes package
 
 To install ActivityIndex package via GitHub, the user must have
-installed [devtools](https://cran.r-project.org/package=devtools), which
+installed [remotes](https://cran.r-project.org/package=remotes), which
 could be completed by using the following R command
 
 ``` r
-install.packages("devtools")
+install.packages("remotes")
 ```
 
 ### Install ActivityIndex package
 
 The following R command can be used to install the latest version of
-ActivityIndex via GitHub:
+`ActivityIndex` via GitHub:
 
 ``` r
-devtools::install_github("javybai/ActivityIndex")
+remotes::install_github("javybai/ActivityIndex")
 ```
 
 ## ActivityIndex User Manual
 
-The ActivityIndex package includes a vignette to demonstrate a typical
+The `ActivityIndex` package includes a vignette to demonstrate a typical
 work flow of computing AI. The vignette can either be accessed by R
 command
 
@@ -67,10 +70,9 @@ command
 browseVignettes(package="ActivityIndex")
 ```
 
-and interactively browsing or going to
-<https://javybai.github.io/ActivityIndex/articles/ActivityIndexIntro.html>.
+and interactively browsing or going to [the online
+vignette](https://javybai.github.io/ActivityIndex/articles/ActivityIndexIntro.html).
 
 ## Further Questions
 
-Please contact the author and maintainer Jiawei Bai (jbai \[at\] jhsph
-\[dot\] edu) or open an issue at GitHub.
+Please contact the author and maintainer or open an issue at GitHub.

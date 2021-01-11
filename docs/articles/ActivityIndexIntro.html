@@ -72,14 +72,15 @@
 
       
 
-      </header><script src="ActivityIndexIntro_files/header-attrs-2.3/header-attrs.js"></script><div class="row">
+      </header><script src="ActivityIndexIntro_files/header-attrs-2.5/header-attrs.js"></script><link href="ActivityIndexIntro_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="ActivityIndexIntro_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to the <code>ActivityIndex</code> package in <code>R</code>
 </h1>
                         <h4 class="author">Jiawei Bai</h4>
             
-            <h4 class="date">2020-09-24</h4>
+            <h4 class="date">2021-01-11</h4>
       
       
       <div class="hidden name"><code>ActivityIndexIntro.Rmd</code></div>
@@ -93,8 +94,9 @@
 <h1 class="hasAnchor">
 <a href="#data-description" class="anchor"></a>Data description</h1>
 <p>The sample data were collected by accelerometer GT3X+ (ActiGraph, ), downloaded from . The data are available in the <strong>ActivityIndex</strong> package and their paths can be acquired using command:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"sample_GT3X+.csv.gz"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ActivityIndex"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"sample_table.csv.gz"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ActivityIndex"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample_GT3X+.csv.gz"</span>, package <span class="op">=</span> <span class="st">"ActivityIndex"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample_table.csv.gz"</span>, package <span class="op">=</span> <span class="st">"ActivityIndex"</span><span class="op">)</span></code></pre></div>
 <p><code>sample_GT3X+.csv.gz</code> is the standard output of GT3X+ accelerometer, with a <span class="math inline">\(10\)</span>-line header containing the basic information of the data collection, followed by <span class="math inline">\(3\)</span>-column raw acceleration data. <code>sample_table.csv.gz</code> contains the same <span class="math inline">\(3\)</span>-column acceleration data without the <span class="math inline">\(10\)</span>-line header. The first <span class="math inline">\(15\)</span> lines of <code>sample_GT3X+.csv.gz</code> are shown below:</p>
 <pre><code>## ------------ Data File Created By ActiGraph GT3X+ ActiLife v6.7.1 Firmware v2.5.0 date format M/d/yyyy at 30 Hz  Filter Normal -----------
 ## Serial Number: NEO1DXXXXXXXX
@@ -123,12 +125,14 @@
 <h1 class="hasAnchor">
 <a href="#read-the-data" class="anchor"></a>Read the data</h1>
 <p><code>ReadGT3XPlus</code> and <code>ReadTable</code> functions read the GT3X+ <code>.csv.gz</code> file and the <span class="math inline">\(3\)</span>-column acceleration table, respectively. To read the data, use the following code</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">sampleGT3XPlus</span> <span class="kw">=</span> <span class="fu"><a href="../reference/ReadGT3XPlus.html">ReadGT3XPlus</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>,
-    <span class="st">"sample_GT3X+.csv.gz"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ActivityIndex"</span>))
-<span class="no">sampleTable</span> <span class="kw">=</span> <span class="fu"><a href="../reference/ReadTable.html">ReadTable</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"sample_table.csv.gz"</span>,
-    <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ActivityIndex"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sampleGT3XPlus</span> <span class="op">=</span> <span class="fu"><a href="../reference/ReadGT3XPlus.html">ReadGT3XPlus</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, 
+    <span class="st">"sample_GT3X+.csv.gz"</span>, package <span class="op">=</span> <span class="st">"ActivityIndex"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">sampleTable</span> <span class="op">=</span> <span class="fu"><a href="../reference/ReadTable.html">ReadTable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample_table.csv.gz"</span>, 
+    package <span class="op">=</span> <span class="st">"ActivityIndex"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Now that object <code>sampleGT3XPlus</code> has class <code>GT3XPlus</code>, which contains the raw data and header information. Function <code>ReadGT3XPlus</code> automatically applies time stamps to the acceleration time series using the information from the header. For example, our sample data look like this</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">sampleGT3XPlus</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">sampleGT3XPlus</span><span class="op">)</span></code></pre></div>
 <pre><code>## List of 8
 ##  $ SN          : chr "NEO1DXXXXXXXX"
 ##  $ StartTime   : chr "10:54:00"
@@ -146,7 +150,8 @@
 ##   ..- attr(*, ".internal.selfref")=&lt;externalptr&gt; 
 ##  - attr(*, "class")= chr "GT3XPlus"</code></pre>
 <p>However, <code>sampleTable</code> is much simpler, since limited information was given. The first <span class="math inline">\(6\)</span> lines of it look like this</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">sampleTable</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">6</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sampleTable</span>, n <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></code></pre></div>
 <pre><code>##    Index X Y Z
 ## 1:     1 0 0 0
 ## 2:     2 0 0 0
@@ -163,40 +168,45 @@
 \text{AI}^{\text{new}}_i(t;H)=\sqrt{\max\left(\frac{1}{3}\left\{\sum_{m=1}^{3}{\frac{\sigma^2_{im}(t;H)-\bar{\sigma}^2_{i}}{\bar{\sigma}^2_{i}}}\right\},0\right)},\label{EQ: AI}
 \]</span> where <span class="math inline">\(\sigma^2_{im}(t;H)\)</span> (<span class="math inline">\(m=1,2,3\)</span>) is axis-<span class="math inline">\(m\)</span>’s moving variance during the window starting from time <span class="math inline">\(t\)</span> (of size <span class="math inline">\(H\)</span>), and <span class="math inline">\(\bar{\sigma}_i\)</span> is the systematic noise of the signal when the device is placed steady.</p>
 <p>Function <code>computeActivityIndex</code> is used to compute AI. The syntax of the function is</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span>(<span class="no">x</span>, <span class="kw">x_sigma0</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="kw">sigma0</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-    <span class="kw">epoch</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="no">hertz</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span><span class="op">(</span><span class="va">x</span>, x_sigma0 <span class="op">=</span> <span class="cn">NULL</span>, sigma0 <span class="op">=</span> <span class="cn">NULL</span>, 
+    epoch <span class="op">=</span> <span class="fl">1</span>, <span class="va">hertz</span><span class="op">)</span></code></pre></div>
 <p><code>x</code> is the data used to compute AI. It can either be a <code>GT3XPlus</code> object, or a <span class="math inline">\(4\)</span>-column data frame (tri-axial acceleration time series with an index column). Either <code>x_sigma0</code> or <code>sigma0</code> are used to determine the systematic noise <span class="math inline">\(\bar{\sigma}_i\)</span>. More detailed example will follow to illustrate how to use them. <code>epoch</code> is the epoch length (in second) of the AI. For example, the default <code>epoch=1</code> yields to <span class="math inline">\(1\)</span>-second AI, while minute-by-minute AI is given by <code>epoch=60</code>. <code>hertz</code> specifies the sample rate (in Hertz), which is usually <span class="math inline">\(10\)</span>, <span class="math inline">\(30\)</span> or <span class="math inline">\(80\)</span>, etc.</p>
 <p>We will continue our example of computing AI using our data <code>sampleGT3XPlus</code> and <code>sampleTable</code>.</p>
 <div id="find-barsigma_i-on-the-fly" class="section level2">
 <h2 class="hasAnchor">
 <a href="#find-barsigma_i-on-the-fly" class="anchor"></a>Find <span class="math inline">\(\bar{\sigma}_i\)</span> on-the-fly</h2>
 <p>According to the definition of the systematic noise <span class="math inline">\(\bar{\sigma}_i\)</span>, it changes with subject <span class="math inline">\(i\)</span>. Therefore, strictly speaking, we are to compute <span class="math inline">\(\bar{\sigma}_i\)</span> every time we compute AI for a new subject <span class="math inline">\(i\)</span>. Argument <code>x_sigma0</code> can be used to specify a <span class="math inline">\(4\)</span>-column data frame (one column for indices and three columns for acceleration) which is used to calculate <span class="math inline">\(\bar{\sigma}_i\)</span>. The <span class="math inline">\(4\)</span>-column data frame should contain the raw accelerometry data collected while the accelerometer is not worn or kept steady. For example, if we say a segment of our sample data (<code>sampleTable[1004700:1005600,]</code>) meets such requirement, we could compute AI using the following code</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">AI_sampleTable_x</span> <span class="kw">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span>(<span class="no">sampleTable</span>,
-    <span class="kw">x_sigma0</span> <span class="kw">=</span> <span class="no">sampleTable</span>[<span class="fl">1004700</span>:<span class="fl">1005600</span>, ], <span class="kw">epoch</span> <span class="kw">=</span> <span class="fl">1</span>,
-    <span class="kw">hertz</span> <span class="kw">=</span> <span class="fl">30</span>)
-<span class="no">AI_sampleGT3XPlus_x</span> <span class="kw">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span>(<span class="no">sampleGT3XPlus</span>,
-    <span class="kw">x_sigma0</span> <span class="kw">=</span> <span class="no">sampleTable</span>[<span class="fl">1004700</span>:<span class="fl">1005600</span>, ], <span class="kw">epoch</span> <span class="kw">=</span> <span class="fl">1</span>,
-    <span class="kw">hertz</span> <span class="kw">=</span> <span class="fl">30</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">AI_sampleTable_x</span> <span class="op">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span><span class="op">(</span><span class="va">sampleTable</span>, 
+    x_sigma0 <span class="op">=</span> <span class="va">sampleTable</span><span class="op">[</span><span class="fl">1004700</span><span class="op">:</span><span class="fl">1005600</span>, <span class="op">]</span>, epoch <span class="op">=</span> <span class="fl">1</span>, 
+    hertz <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
+<span class="va">AI_sampleGT3XPlus_x</span> <span class="op">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span><span class="op">(</span><span class="va">sampleGT3XPlus</span>, 
+    x_sigma0 <span class="op">=</span> <span class="va">sampleTable</span><span class="op">[</span><span class="fl">1004700</span><span class="op">:</span><span class="fl">1005600</span>, <span class="op">]</span>, epoch <span class="op">=</span> <span class="fl">1</span>, 
+    hertz <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="find-barsigma_i-beforehand" class="section level2">
 <h2 class="hasAnchor">
 <a href="#find-barsigma_i-beforehand" class="anchor"></a>Find <span class="math inline">\(\bar{\sigma}_i\)</span> beforehand</h2>
 <p>Sometimes we do not want to calculate <span class="math inline">\(\bar{\sigma}_i\)</span> whenever computing AI. For example, if <span class="math inline">\(10\)</span> accelerometers were used to collect data over <span class="math inline">\(100\)</span> subjects, there is no reason to calculate <span class="math inline">\(\bar{\sigma}_i\)</span> for <span class="math inline">\(100\)</span> times. One <span class="math inline">\(\bar{\sigma}_i\)</span> is only needed for one accelerometer. Furthermore, if we could verify the <span class="math inline">\(\bar{\sigma}_i\)</span>’s of the <span class="math inline">\(10\)</span> accelerometers are close to each others, we could combine them into a single <span class="math inline">\(\bar{\sigma}=\sum_{i=1}^{10}{\bar{\sigma}_i}/10\)</span>. In this case, <span class="math inline">\(\bar{\sigma}\)</span> will be used for all subjects in that study, which is crucial for fast processing of data collected by large studies.</p>
 <p>This can be achieved by using the argument <code>x_sigma0</code> to specify a pre-determined <span class="math inline">\(\bar{\sigma}_i\)</span>. Still using the same segment of data (<code>sampleTable[1004700:1005600,]</code>) as an example, we calculate a <code>sample_sigma0</code> beforehand with code</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">sample_sigma0</span> <span class="kw">=</span> <span class="fu"><a href="../reference/Sigma0.html">Sigma0</a></span>(<span class="no">sampleTable</span>[<span class="fl">1004700</span>:<span class="fl">1005600</span>, ],
-    <span class="kw">hertz</span> <span class="kw">=</span> <span class="fl">30</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sample_sigma0</span> <span class="op">=</span> <span class="fu"><a href="../reference/Sigma0.html">Sigma0</a></span><span class="op">(</span><span class="va">sampleTable</span><span class="op">[</span><span class="fl">1004700</span><span class="op">:</span><span class="fl">1005600</span>, <span class="op">]</span>, 
+    hertz <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
 <p>Then we could use this <code>sample_sigma0</code>=<span class="math inline">\(0.00218\)</span> to compute AI with code</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">AI_sampleTable</span> <span class="kw">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span>(<span class="no">sampleTable</span>, <span class="kw">sigma0</span> <span class="kw">=</span> <span class="no">sample_sigma0</span>,
-    <span class="kw">epoch</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">hertz</span> <span class="kw">=</span> <span class="fl">30</span>)
-<span class="no">AI_sampleGT3XPlus</span> <span class="kw">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span>(<span class="no">sampleGT3XPlus</span>,
-    <span class="kw">sigma0</span> <span class="kw">=</span> <span class="no">sample_sigma0</span>, <span class="kw">epoch</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">hertz</span> <span class="kw">=</span> <span class="fl">30</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">AI_sampleTable</span> <span class="op">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span><span class="op">(</span><span class="va">sampleTable</span>, sigma0 <span class="op">=</span> <span class="va">sample_sigma0</span>, 
+    epoch <span class="op">=</span> <span class="fl">1</span>, hertz <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
+<span class="va">AI_sampleGT3XPlus</span> <span class="op">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span><span class="op">(</span><span class="va">sampleGT3XPlus</span>, 
+    sigma0 <span class="op">=</span> <span class="va">sample_sigma0</span>, epoch <span class="op">=</span> <span class="fl">1</span>, hertz <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="explore-ai" class="section level1">
 <h1 class="hasAnchor">
 <a href="#explore-ai" class="anchor"></a>Explore AI</h1>
 <p>Using either method to compute AI yield to the same result. The output of function <code>computeActivityIndex</code> has two columns: <code>RecordNo</code> saves the indices and <code>AI</code> stores AI. The first <span class="math inline">\(10\)</span> lines of <code>AI_sampleGT3XPlus</code> is as follow</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">AI_sampleGT3XPlus</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">AI_sampleGT3XPlus</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <pre><code>## Showing head and tail rows
 ##   RecordNo      AI
 ## 1 10:54:00   0.000
@@ -213,12 +223,14 @@
 ## 9  10:54:08 124.708
 ## 10 10:54:09 147.842</code></pre>
 <p>We could also compute AI in different epoch. Say we want minute-by-minute AI, then we could use the following code</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">AI_sampleTable_min</span> <span class="kw">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span>(<span class="no">sampleTable</span>,
-    <span class="kw">sigma0</span> <span class="kw">=</span> <span class="no">sample_sigma0</span>, <span class="kw">epoch</span> <span class="kw">=</span> <span class="fl">60</span>, <span class="kw">hertz</span> <span class="kw">=</span> <span class="fl">30</span>)
-<span class="no">AI_sampleGT3XPlus_min</span> <span class="kw">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span>(<span class="no">sampleGT3XPlus</span>,
-    <span class="kw">sigma0</span> <span class="kw">=</span> <span class="no">sample_sigma0</span>, <span class="kw">epoch</span> <span class="kw">=</span> <span class="fl">60</span>, <span class="kw">hertz</span> <span class="kw">=</span> <span class="fl">30</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">AI_sampleTable_min</span> <span class="op">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span><span class="op">(</span><span class="va">sampleTable</span>, 
+    sigma0 <span class="op">=</span> <span class="va">sample_sigma0</span>, epoch <span class="op">=</span> <span class="fl">60</span>, hertz <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
+<span class="va">AI_sampleGT3XPlus_min</span> <span class="op">=</span> <span class="fu"><a href="../reference/computeActivityIndex.html">computeActivityIndex</a></span><span class="op">(</span><span class="va">sampleGT3XPlus</span>, 
+    sigma0 <span class="op">=</span> <span class="va">sample_sigma0</span>, epoch <span class="op">=</span> <span class="fl">60</span>, hertz <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></code></pre></div>
 <p>And according to the definition of AI, the minute-by-minute AI’s are simply the sum of all 1-second AI within each minute. The AI during the first <span class="math inline">\(6\)</span> minutes are</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">AI_sampleGT3XPlus_min</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">AI_sampleGT3XPlus_min</span><span class="op">)</span></code></pre></div>
 <pre><code>## Showing head and tail rows
 ##   RecordNo       AI
 ## 1 10:54:00 3002.460
@@ -252,7 +264,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
